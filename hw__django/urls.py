@@ -5,6 +5,7 @@ from django.contrib import admin
 
 urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
+    path('blog/<slug:slug>/', myapp.views.blog_detail, name='post_detail'),
     path('', myapp.views.index, name='index'),
     path('login/', myapp.views.login, name="login"),
     path('register/', myapp.views.register, name='register'),

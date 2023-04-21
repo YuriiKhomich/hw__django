@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
@@ -25,10 +26,20 @@ class BlogPost(models.Model):
     def __str__(self):
         return self.title
     
+    def _generate_unique_slug(self):
+        slug = f"{slugify(self.title)}-{datetime.now().strftime('%Y-%m-%d')}"
+        unique_slug = slug
+        num = 1
+
+        while BlogPost.objects.filter(slug=unique_slug).exists():
+            unique_slug = f"{slug}-{num}"
+            num += 1
+
+        return unique_slug
+
     def save(self, *args, **kwargs):
         if not self.slug:
-            slug = f"{slugify(self.title)}-{self.created_at.strftime('%Y-%m-%d')}"
-            self.slug = slug
+            self.slug = self._generate_unique_slug()
         super().save(*args, **kwargs)
 
 

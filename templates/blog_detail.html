@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="padding: 20px; background-color: #dc8f8f"> Blog detail</div>
-<a href="{% url 'index' %}">To the index page</a>
+<h1>{{ blog_post.title }}</h1>
+<p>{{ blog_post.content }}</p>
+
+<h2>Comments</h2>
+{% if comments %}
+    <ul>
+    {% for comment in comments %}
+        <li>
+            <p>{{ comment.user.username }} ({{ comment.created_at }})</p>
+            <p>{{ comment.content }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No comments yet. Be the first to comment!</p>
+{% endif %}
+</ul>
+<a href="{% url 'main' %}">Main Page</a>
 {% endblock %}

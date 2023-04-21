@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="padding: 20px; background-color: #bceee6"> All blogs</div>
-<a href="{% url 'index' %}">To the index page</a>
+<div style="padding: 20px; background-color: #bceee6">All blogs</div>
+<ul>
+{% for blog_post in blog_posts %}
+    <h2><a href="{% url 'post_detail' blog_post.slug %}">{{ blog_post.title }}</a></h2>
+{% endfor %}
+</ul>
+<a href="{% url 'index' %}">Start page</a>
 {% endblock %}
