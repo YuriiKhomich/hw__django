@@ -26,21 +26,13 @@ class BlogPost(models.Model):
     def __str__(self):
         return self.title
     
-    def _generate_unique_slug(self):
-        slug = f"{slugify(self.title)}-{datetime.now().strftime('%Y-%m-%d')}"
-        unique_slug = slug
-        num = 1
-
-        while BlogPost.objects.filter(slug=unique_slug).exists():
-            unique_slug = f"{slug}-{num}"
-            num += 1
-
-        return unique_slug
-
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = self._generate_unique_slug()
-        super().save(*args, **kwargs)
+            super().save(*args, **kwargs)
+            self.slug = f"{slugify(self.title)}-{self.id}"
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
 
 
 class Comment(models.Model):
