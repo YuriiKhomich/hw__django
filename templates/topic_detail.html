@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div style="padding: 20px; background-color: #bceee6">Topic Details</div>
+
+  <h2>{{ topic.title }}</h2>
+  <p>{{ topic.content }}</p>
+  <p>Created at: {{ topic.created_at }}</p>
+  <p>Author: {{ topic.author }}</p>
+
+  <h3>Comments</h3>
+  {% for comment in comments %}
+    <div>
+      <p>{{ comment.content }}</p>
+      <p>Posted by: {{ comment.user }}</p>
+      <p>Created at: {{ comment.created_at }}</p>
+    </div>
+  {% empty %}
+    <p>No comments yet.</p>
+  {% endfor %}
+
+  <a href="{% url 'main' %}">Back to Blogs page</a>
+{% endblock %}

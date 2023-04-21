@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="padding: 20px; background-color: #dc8f8f"> Blog detail</div>
-<a href="{% url 'index' %}">To the index page</a>
+<div style="padding: 20px; background-color: #bceee6">Blog: {{ blog.title }}</div>
+<h3>Topics:</h3>
+<ul>
+{% for topic in topics %}
+    <li><a href="{% url 'topic_detail' topic.slug %}">{{ topic.title }}</a></li>
+{% endfor %}
+</ul>
+<a href="{% url 'main' %}">Back to all blogs</a>
 {% endblock %}

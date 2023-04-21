@@ -2,5 +2,13 @@
 
 {% block content %}
 <div style="padding: 20px; background-color: #bceee6"> All blogs</div>
+<ul>
+{% for blog in blogs %}
+    <li>
+        <h2><a href="{% url 'blog_detail' blog.id %}">{{ blog.title }}</a></h2>
+        <p>Author: {{ blog.author }}</p>
+    </li>
+{% endfor %}
+</ul>
 <a href="{% url 'index' %}">To the index page</a>
 {% endblock %}
