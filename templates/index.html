@@ -3,14 +3,13 @@
 {% block content %}
 {% include 'add.html' with name='Guest!' %}
 <div style="padding: 20px; background-color: #a3c9dc">Start page. </div>
-
+<a href="{% url 'main' %}">Main page</a>
+<br>
+<br>
+<br>
 <a href="{% url 'login' %}">login</a>
 <br>
 <a href="{% url 'register' %}">Register form</a>
-<br>
-<a href="{% url 'main' %}">Blogs page</a>
-<br>
-<a href="{% url 'blog_detail' %}">Blog detail</a>
 <br>
 <a href="{% url 'create_blog' %}">Create Blog</a>
 

@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
@@ -27,9 +28,11 @@ class BlogPost(models.Model):
     
     def save(self, *args, **kwargs):
         if not self.slug:
-            slug = f"{slugify(self.title)}-{self.created_at.strftime('%Y-%m-%d')}"
-            self.slug = slug
-        super().save(*args, **kwargs)
+            super().save(*args, **kwargs)
+            self.slug = f"{slugify(self.title)}-{self.id}"
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
 
 
 class Comment(models.Model):

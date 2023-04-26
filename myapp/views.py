@@ -1,5 +1,7 @@
 
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+from myapp.models import BlogPost
 
 
 def index(request):
@@ -15,11 +17,13 @@ def register(request):
 
 
 def main(request):
-    return render(request, 'main.html')
+     blog_posts = BlogPost.objects.all()
+     return render(request, 'main.html', {'blog_posts': blog_posts})
 
 
-def blog_detail(request, name=''):
-    return render(request, 'blog_detail.html')
+def blog_detail(request, slug):
+    blog_post = get_object_or_404(BlogPost, slug=slug)
+    return render(request, 'blog_detail.html', {'blog_post': blog_post})
 
 
 def create(request):
