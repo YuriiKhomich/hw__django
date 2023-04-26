@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="padding: 20px; background-color: #d21e1e"> Enter login!</div>
-<a href="{% url 'index' %}">To the index page</a>
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" name="username" required><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" required><br>
+        <button type="submit">Login</button>
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
+    </form>
+    <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
 {% endblock %}

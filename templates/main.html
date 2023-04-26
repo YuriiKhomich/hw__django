@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="padding: 20px; background-color: #bceee6">All blogs</div>
-<ul>
-{% for blog_post in blog_posts %}
-    <h2><a href="{% url 'post_detail' blog_post.slug %}">{{ blog_post.title }}</a></h2>
+<h2>Список доступных топиков:</h2>
+{% for topic in topics %}
+    <p><a href="{% url 'blogs_by_topic' topic.id %}">{{ topic.title }}</a></p>
 {% endfor %}
-</ul>
-<a href="{% url 'index' %}">Start page</a>
+
+</form>
+<h2>Список всех блогов:</h2>
+<form method="GET" action="{% url 'search_blog_posts' %}">
+    <input type="text" name="q" placeholder="Search blog posts...">
+    <input type="submit" value="Search">
+<a href="{% url 'create_blog_post' %}">Create a new blog post</a>
+{% for blog in blogs %}
+    <h3><a href="{% url 'blog_post_detail' blog.slug %}">{{ blog.title }}</a></h3>
+{% endfor %}
+    <a href="{% url 'index' %}">Start page</a>
+<br>
 {% endblock %}

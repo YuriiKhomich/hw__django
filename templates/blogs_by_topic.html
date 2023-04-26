@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Список блогов для топика "{{ topic.title }}"</h2>
+{% for blog in blogs %}
+    <h3><a href="{% url 'blog_post_detail' blog.slug %}">{{ blog.title }}</a></h3>
+{% endfor %}
+{% endblock %}

@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="GET" action="{% url 'search_blog_posts' %}">
+    <input type="text" name="q" placeholder="Search blog posts...">
+    <input type="submit" value="Search">
+</form>
+
+{% if blog_posts %}
+    <ul>
+    {% for blog_post in blog_posts %}
+        <li><a href="{% url 'blog_post_detail' blog_post.slug %}">{{ blog_post.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No blog posts found.</p>
+{% endif %}
+{% endblock %}

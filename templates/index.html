@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% include 'add.html' with name='Guest!' %}
+{% if user.is_authenticated %}
+    {% include 'add.html' with name=user.username %}
+{% else %}
+    {% include 'add.html' with name='Guest!' %}
+{% endif %}
 <div style="padding: 20px; background-color: #a3c9dc">Start page. </div>
 <a href="{% url 'main' %}">Main page</a>
 <br>
@@ -12,5 +16,9 @@
 <a href="{% url 'register' %}">Register form</a>
 <br>
 <a href="{% url 'create_blog' %}">Create Blog</a>
+<br>
+{% if user.is_authenticated %}
+    <a href="{% url 'logout' %}">Logout</a>
+{% endif %}
 
 {% endblock %}
