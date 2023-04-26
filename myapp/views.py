@@ -21,9 +21,9 @@ def main(request):
      return render(request, 'main.html', {'blog_posts': blog_posts})
 
 
-def blog_detail(request, slug, comments=None):
+def blog_detail(request, slug):
     blog_post = get_object_or_404(BlogPost, slug=slug)
-    return render(request, 'blog_detail.html', {'blog_post': blog_post, 'comments': comments})
+    return render(request, 'blog_detail.html', {'blog_post': blog_post})
 
 
 def create(request):
